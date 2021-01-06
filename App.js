@@ -16,6 +16,16 @@ export default function App() {
      ]);
     //setEnteredGoal('') // clear text box 
   };
+ 
+  // const removeGoalHandler = goalId =>{
+  //   console.log("Deleted",goalId);
+  //   setCourseGoals(courseGoals.filter((goal) => goal.id !== goalId));
+  // }
+  const removeGoalHandler = goalId =>{
+    setCourseGoals(currentGoals =>{
+      return currentGoals.filter((goal) => goal.id !== goalId);
+    });
+  }
 
   return (
     <View style={styles.screen}>
@@ -24,7 +34,7 @@ export default function App() {
       keyExtractor = {(item , index) => item.id}
         data={courseGoals}
         renderItem={itemData => (
-           <GoalItem title={itemData.item.value} />
+           <GoalItem id={itemData.item.id} title={itemData.item.value} onDelete={removeGoalHandler} />
         )}
       />
     </View>
